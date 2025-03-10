@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 let books = require("./booksdb.js");
 const regd_users = express.Router();
 
-let users = []; 
+let users = [];
 
 const isValid = (username) => {
     return users.some(user => user.username === username);
@@ -40,7 +40,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
         return res.status(401).json({ message: "Unauthorized: Please login first" });
     }
 
-    const username = req.session.username; 
+    const username = req.session.username;
 
     if (!books[isbn]) {
         return res.status(404).json({ message: "Book not found!" });
@@ -51,7 +51,6 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
     res.status(200).json({ message: "Review added/updated successfully!", reviews: books[isbn].reviews });
 });
 
-// ✅ Task 9: Delete a Book Review (Fixed JWT verification)
 regd_users.delete("/auth/review/:isbn", (req, res) => {
     const isbn = req.params.isbn;
 
@@ -59,7 +58,7 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
         return res.status(401).json({ message: "Unauthorized: Please login first" });
     }
 
-    const username = req.session.username;  // ✅ Fix: Use session-stored username
+    const username = req.session.username; 
 
     if (!books[isbn]) {
         return res.status(404).json({ message: "Book not found!" });
