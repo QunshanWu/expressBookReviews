@@ -67,7 +67,7 @@ public_users.get('/author/:author',function (req, res) {
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
-    const author = req.params.title;
+    const title = req.params.title;
 
     const output = Object.values(books).filter(book => book.title === title);
 
@@ -90,7 +90,6 @@ public_users.get('/review/:isbn',function (req, res) {
 
     return res.status(404).json({message: "Book doesn't exist"});
 });
-
 
 // Get the book list by Promises
 public_users.get('/' , async (req,res) => {
@@ -169,6 +168,5 @@ public_users.get('/title/:title', function(req,res){
         return res.status(404).json({message:"No books found"});
     })
 });
-
 
 module.exports.general = public_users;
